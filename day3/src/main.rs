@@ -1,20 +1,9 @@
 use std::collections::HashSet;
 
-#[derive(Eq)]
+#[derive(Eq, Hash, PartialEq)]
 struct Coordinates {
     point: (i32, i32),
     step: i32,
-}
-impl PartialEq for Coordinates {
-    fn eq(&self, other: &Coordinates) -> bool {
-        self.point == other.point
-    }
-}
-
-impl std::hash::Hash for Coordinates {
-    fn hash<H: std::hash::Hasher>(&self, state: &mut H) {
-        self.point.hash(state);
-    }
 }
 
 impl std::borrow::Borrow<(i32, i32)> for Coordinates {
@@ -22,6 +11,7 @@ impl std::borrow::Borrow<(i32, i32)> for Coordinates {
         &self.point
     }
 }
+
 fn gen_coords(coords: &mut HashSet<Coordinates>, wire: &Vec<&str>) {
     let mut point = (0, 0);
     let mut step = 0;
@@ -62,7 +52,6 @@ fn main() {
     gen_coords(&mut coords2, &wire2);
 
     let inte: HashSet<_> = coords1.intersection(&coords2).collect();
-
     let distance = inte
         .iter()
         .map(|coord| i32::abs(coord.point.0) + i32::abs(coord.point.1))

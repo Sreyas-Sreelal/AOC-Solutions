@@ -22,7 +22,7 @@ impl std::borrow::Borrow<(i32, i32)> for Coordinates {
         &self.point
     }
 }
-fn gen_coords(coords: &mut HashSet<Coordinates>, wire: &Vec<&str>) {
+fn gen_coords(coords: &mut HashSet<Coordinates>, wire: &[&str]) {
     let mut point = (0, 0);
     let mut step = 0;
     for &token in wire.iter() {

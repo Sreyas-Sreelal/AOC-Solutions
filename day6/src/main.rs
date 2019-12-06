@@ -15,7 +15,7 @@ fn main() {
 
     let mut orbits: HashMap<&str, &str> = HashMap::new();
     for x in inputs.iter() {
-        let data: Vec<&str> = x.split(')').map(|x| x).collect();
+        let data: Vec<&str> = x.split(')').collect();
         orbits.insert(data[1], data[0]);
     }
 
